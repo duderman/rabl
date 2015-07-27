@@ -53,7 +53,9 @@ module Rabl
               # pull format directly from rails unless it is html
               request_format = context_scope.request.format.to_sym
               source_format = request_format unless request_format == :html
-              context_scope.lookup_context.find(file, [], partial, [], { :formats => [source_format] })
+              context_scope.lookup_context.find(
+                file, [], partial, [], { :formats => [source_format], :handlers => [:rabl] }
+              )
             end
           end
           template = lookup_proc.call(false) rescue nil
